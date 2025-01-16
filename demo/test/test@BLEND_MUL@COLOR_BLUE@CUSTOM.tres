@@ -1,0 +1,35 @@
+[gd_resource type="Shader" format=3 uid="uid://c350ion5uq4o4"]
+
+[resource]
+code = "#define BLEND_MUL
+#define COLOR_BLUE
+#define CUSTOM
+
+shader_type canvas_item;
+
+#ifdef BLEND_MUL
+render_mode blend_mul;
+#endif
+
+#ifdef CUSTOM
+uniform vec4 custom_color : source_color = vec4(1);
+#endif
+
+void vertex() {
+#ifdef SCALE
+	VERTEX *= 2.0;
+#endif
+#ifdef COLOR_RED
+	COLOR.rgb *= vec3(1,0,0);
+#endif
+#ifdef COLOR_GREEN
+	COLOR.rgb *= vec3(0,1,0);
+#endif
+#ifdef COLOR_BLUE
+	COLOR.rgb *= vec3(0,0,1);
+#endif
+#ifdef CUSTOM
+	COLOR *= custom_color;
+#endif
+}"
+metadata/_defines = PackedStringArray("BLEND_MUL", "COLOR_BLUE", "CUSTOM")

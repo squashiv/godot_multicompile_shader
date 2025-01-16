@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://d4muhi0sqyc6y"]
+
+[ext_resource type="Script" uid="uid://dv25umxja7k2j" path="res://addons/multicompile_shader/multicompile_material.gd" id="1_ytiva"]
+[ext_resource type="Shader" uid="uid://clrcf0ekc6o2t" path="res://demo/test/test@COLOR_RED.tres" id="2_dar0o"]
+[ext_resource type="Shader" uid="uid://crbqh6n3r74xo" path="res://demo/test/test.tres" id="3_j5lb4"]
+[ext_resource type="Shader" uid="uid://b1c52sicyjxbx" path="res://demo/test/test@COLOR_GREEN@SCALE.tres" id="4_j5lb4"]
+[ext_resource type="Shader" uid="uid://c350ion5uq4o4" path="res://demo/test/test@BLEND_MUL@COLOR_BLUE@CUSTOM.tres" id="5_u10mr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u10mr"]
+shader = ExtResource("2_dar0o")
+script = ExtResource("1_ytiva")
+source = ExtResource("3_j5lb4")
+defines = PackedStringArray("COLOR_RED")
+metadata/_custom_type_script = ExtResource("1_ytiva")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ytiva"]
+shader = ExtResource("4_j5lb4")
+script = ExtResource("1_ytiva")
+source = ExtResource("3_j5lb4")
+defines = PackedStringArray("SCALE", "COLOR_GREEN")
+metadata/_custom_type_script = ExtResource("1_ytiva")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5lb4"]
+shader = ExtResource("5_u10mr")
+shader_parameter/custom_color = Color(0.726628, 0, 0.307149, 1)
+script = ExtResource("1_ytiva")
+source = ExtResource("3_j5lb4")
+defines = PackedStringArray("COLOR_BLUE", "CUSTOM", "BLEND_MUL")
+metadata/_custom_type_script = ExtResource("1_ytiva")
+
+[node name="Demo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_u10mr")
+layout_mode = 0
+offset_left = 94.0
+offset_top = 102.0
+offset_right = 134.0
+offset_bottom = 142.0
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ytiva")
+layout_mode = 0
+offset_left = 218.0
+offset_top = 102.0
+offset_right = 258.0
+offset_bottom = 142.0
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_j5lb4")
+layout_mode = 0
+offset_left = 276.0
+offset_top = 82.0
+offset_right = 316.0
+offset_bottom = 122.0

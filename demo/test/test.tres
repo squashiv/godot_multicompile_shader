@@ -1,0 +1,37 @@
+[gd_resource type="Shader" script_class="MulticompileShader" load_steps=2 format=3 uid="uid://crbqh6n3r74xo"]
+
+[ext_resource type="Script" uid="uid://bfpi1rdwv2b3w" path="res://addons/multicompile_shader/multicompile_shader.gd" id="1_8lolm"]
+
+[resource]
+code = "shader_type canvas_item;
+
+#ifdef BLEND_MUL
+render_mode blend_mul;
+#endif
+
+#ifdef CUSTOM
+uniform vec4 custom_color : source_color = vec4(1);
+#endif
+
+void vertex() {
+#ifdef SCALE
+	VERTEX *= 2.0;
+#endif
+
+#ifdef COLOR_RED
+	COLOR.rgb *= vec3(1,0,0);
+#endif
+#ifdef COLOR_GREEN
+	COLOR.rgb *= vec3(0,1,0);
+#endif
+#ifdef COLOR_BLUE
+	COLOR.rgb *= vec3(0,0,1);
+#endif
+
+#ifdef CUSTOM
+	COLOR *= custom_color;
+#endif
+}"
+script = ExtResource("1_8lolm")
+options = PackedStringArray("SCALE", "CUSTOM", "COLOR,RED,GREEN,BLUE", "BLEND_MUL")
+metadata/_custom_type_script = ExtResource("1_8lolm")
